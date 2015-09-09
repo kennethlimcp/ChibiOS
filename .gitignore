@@ -1,0 +1,9 @@
+build/
+debug/
+.dep/
+*.swp
+*.swo
+*~
+
+.project
+.cproject
