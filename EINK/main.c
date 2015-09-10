@@ -26,11 +26,19 @@ static THD_FUNCTION(Thread1, arg) {
 
   (void)arg;
   chRegSetThreadName("blinker");
+	palClearPad(GPIOC, GPIOC_SMPS_ON);
+	chThdSleepMilliseconds(10);
+	palClearPad(GPIOC, GPIOC_POS_ON);
+	chThdSleepMilliseconds(10);
+	palSetPad(GPIOC, GPIOC_POS_EN);
+	chThdSleepMilliseconds(10);
+	palSetPad(GPIOC, GPIOC_NEG_EN);
+
   while (true) {
-    palClearPad(GPIOA, GPIOA_LED_GREEN);
-    chThdSleepMilliseconds(500);
-    palSetPad(GPIOA, GPIOA_LED_GREEN);
-    chThdSleepMilliseconds(500);
+		palClearPad(GPIOA, GPIOA_RGB_RED);
+    chThdSleepMilliseconds(200);
+		palSetPad(GPIOA, GPIOA_RGB_RED);
+    chThdSleepMilliseconds(100);
   }
 }
 
@@ -52,7 +60,7 @@ int main(void) {
   /*
    * Activates the serial driver 2 using the driver default configuration.
    */
-  sdStart(&SD2, NULL);
+  sdStart(&SD3, NULL);
 
   /*
    * Creates the blinker thread.
@@ -64,8 +72,8 @@ int main(void) {
    * sleeping in a loop and check the button state.
    */
   while (true) {
-    if (!palReadPad(GPIOC, GPIOC_BUTTON))
-      TestThread(&SD2);
+    if (!palReadPad(GPIOB, GPIOB_BUTTON))
+      TestThread(&SD3);
     chThdSleepMilliseconds(500);
   }
 }

@@ -51,56 +51,56 @@
 /*
  * IO pins assignments.
  */
-#define GPIOA_PA0               0
-#define GPIOA_PA1               1
-#define GPIOA_USART_TX          2
-#define GPIOA_USART_RX          3
-#define GPIOA_PA4               4
-#define GPIOA_LED_GREEN         5
-#define GPIOA_PA6               6
-#define GPIOA_PA7               7
-#define GPIOA_PA8               8
-#define GPIOA_PA9               9
-#define GPIOA_PA10              10
-#define GPIOA_PA11              11
-#define GPIOA_PA12              12
-#define GPIOA_SWDIO             13
-#define GPIOA_SWCLK             14
-#define GPIOA_PA15              15
+#define GPIO_EINK_D0            0
+#define GPIO_EINK_D1            1
+#define GPIO_EINK_D2		        2
+#define GPIO_EINK_D3      		  3
+#define GPIO_EINK_D4            4
+#define GPIO_EINK_D5         		5
+#define GPIO_EINK_D6            6
+#define GPIO_EINK_D7            7
+#define GPIOA_RGB_GREEN         8
+#define GPIOA_RGB_BLUE          9
+#define GPIOA_RGB_RED           10
+#define GPIOA_PA11              11	//USBM
+#define GPIOA_PA12              12	//USBP
+#define GPIOA_SWDIO             13	//JTMS
+#define GPIOA_SWCLK             14	//JTCK
+#define GPIOA_PA15              15	//JTDI
 
-#define GPIOB_PB0               0
-#define GPIOB_PB1               1
+#define GPIOB_BM_PGOO           0
+#define GPIOB_BM_CHG            1
 #define GPIOB_PB2               2
-#define GPIOB_SWO               3
-#define GPIOB_PB4               4
-#define GPIOB_PB5               5
-#define GPIOB_PB6               6
-#define GPIOB_PB7               7
-#define GPIOB_PB8               8
-#define GPIOB_PB9               9
-#define GPIOB_PB10              10
-#define GPIOB_PB11              11
-#define GPIOB_PB12              12
-#define GPIOB_PB13              13
-#define GPIOB_PB14              14
-#define GPIOB_PB15              15
+#define GPIOB_SWO               3	//JTDO
+#define GPIOB_PB4               4	//JNTRST
+#define GPIOB_USB_DISC          5	//USB_DISC
+#define GPIOB_SCL               6	//I2C SCL
+#define GPIOB_SDA               7	//I2C SDA
+#define GPIOB_BUTTON            8 //MODE button
+#define GPIOB_EINK_VDD          9
+#define GPIOB_UART_TX           10
+#define GPIOB_UART_RX           11
+#define GPIOB_SD_CS             12
+#define GPIOB_SPI_SCK           13
+#define GPIOB_SPI_MISO          14
+#define GPIOB_SPI_MOSI          15
 
-#define GPIOC_PC0               0
-#define GPIOC_PC1               1
-#define GPIOC_PC2               2
-#define GPIOC_PC3               3
-#define GPIOC_PC4               4
-#define GPIOC_PC5               5
-#define GPIOC_PC6               6
-#define GPIOC_PC7               7
-#define GPIOC_PC8               8
-#define GPIOC_PC9               9
-#define GPIOC_PC10              10
-#define GPIOC_PC11              11
-#define GPIOC_PC12              12
-#define GPIOC_BUTTON            13
-#define GPIOC_PC14              14
-#define GPIOC_PC15              15
+#define GPIOC_EINK_CL           0
+#define GPIOC_EINK_LE           1
+#define GPIOC_EINK_OE           2
+#define GPIOC_EINK_SHR          3
+#define GPIOC_EINK_SPH          4
+#define GPIOC_EINK_GMODE        5
+#define GPIOC_EINK_RL           6
+#define GPIOC_EINK_SPV		      7
+#define GPIOC_EINK_VBORDER      8
+#define GPIOC_EINK_CKV          9
+#define GPIOC_SMPS_ON           10
+#define GPIOC_POS_EN            11
+#define GPIOC_NEG_EN            12
+#define GPIOC_POS_ON            13
+#define GPIOC_OSC32_IN          14
+#define GPIOC_OSC32_OUT         15
 
 #define GPIOD_OSC_IN            0
 #define GPIOD_OSC_OUT           1
@@ -132,34 +132,28 @@
 
 /*
  * Port A setup.
- * Everything input with pull-up except:
- * PA2  - Alternate output          (GPIOA_USART_TX).
- * PA3  - Normal input              (GPIOA_USART_RX).
- * PA5  - Push Pull output          (GPIOA_LED_GREEN).
- * PA13 - Pull-up input             (GPIOA_SWDIO).
- * PA14 - Pull-down input           (GPIOA_SWCLK).
+ * PA0  - PA10, OUTPUT
+ * PA11 - PA12, OPENDRAIN OUTPUT
+ * PA11 - PA15, INPUT
  */
-#define VAL_GPIOACRL            0x88384B88      /*  PA7...PA0 */
-#define VAL_GPIOACRH            0x88888888      /* PA15...PA8 */
-#define VAL_GPIOAODR            0xFFFFBFDF
+#define VAL_GPIOACRL            0x33333333      /*  PA7...PA0 */
+#define VAL_GPIOACRH            0x88877333      /* PA15...PA8 */
+#define VAL_GPIOAODR            0xFFFFF800
 
 /*
  * Port B setup.
- * Everything input with pull-up except:
- * PB3  - Pull-up input             (GPIOA_SWO).
+ * All set to input for now,
  */
-#define VAL_GPIOBCRL            0x88888888      /*  PB7...PB0 */
-#define VAL_GPIOBCRH            0x88888888      /* PB15...PB8 */
-#define VAL_GPIOBODR            0xFFFFFFFF
+#define VAL_GPIOBCRL            0x77777777      /*  PB7...PB0 */
+#define VAL_GPIOBCRH            0x88883337      /* PB15...PB8 */
+#define VAL_GPIOBODR            0xFFFFF200
 
 /*
  * Port C setup.
- * Everything input with pull-up except:
- * PC13 - Normal input              (GPIOC_BUTTON).
  */
-#define VAL_GPIOCCRL            0x88888888      /*  PC7...PC0 */
-#define VAL_GPIOCCRH            0x88488888      /* PC15...PC8 */
-#define VAL_GPIOCODR            0xFFFFFFFF
+#define VAL_GPIOCCRL            0x33333333      /*  PC7...PC0 */
+#define VAL_GPIOCCRH            0x44733733     /* PC15...PC8 */
+#define VAL_GPIOCODR            0xFFFFFF00
 
 /*
  * Port D setup.
@@ -169,7 +163,7 @@
  */
 #define VAL_GPIODCRL            0x88888844      /*  PD7...PD0 */
 #define VAL_GPIODCRH            0x88888888      /* PD15...PD8 */
-#define VAL_GPIODODR            0xFFFFFFFF
+#define VAL_GPIODODR            0xFFFFE400
 
 /*
  * Port E setup.
