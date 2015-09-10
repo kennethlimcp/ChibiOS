@@ -46,4 +46,9 @@ void __early_init(void) {
  * Board-specific initialization code.
  */
 void boardInit(void) {
+	palSetPad(GPIOC, GPIOC_SMPS_ON);
+	palSetPad(GPIOC, GPIOC_POS_ON);
+	palClearPad(GPIOC, GPIOC_POS_EN);
+	palClearPad(GPIOC, GPIOC_NEG_EN);
+	palClearPad(GPIOB, GPIOB_EINK_VDD);
 }

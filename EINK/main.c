@@ -25,20 +25,22 @@ static THD_WORKING_AREA(waThread1, 128);
 static THD_FUNCTION(Thread1, arg) {
 
   (void)arg;
-  chRegSetThreadName("blinker");
-	palClearPad(GPIOC, GPIOC_SMPS_ON);
-	chThdSleepMilliseconds(10);
-	palClearPad(GPIOC, GPIOC_POS_ON);
-	chThdSleepMilliseconds(10);
-	palSetPad(GPIOC, GPIOC_POS_EN);
-	chThdSleepMilliseconds(10);
-	palSetPad(GPIOC, GPIOC_NEG_EN);
-
+	chRegSetThreadName("blinker");
   while (true) {
 		palClearPad(GPIOA, GPIOA_RGB_RED);
-    chThdSleepMilliseconds(200);
+    chThdSleepMilliseconds(50);
 		palSetPad(GPIOA, GPIOA_RGB_RED);
     chThdSleepMilliseconds(100);
+
+		palClearPad(GPIOA, GPIOA_RGB_GREEN);
+		chThdSleepMilliseconds(50);
+		palSetPad(GPIOA, GPIOA_RGB_GREEN);
+		chThdSleepMilliseconds(100);
+
+		palClearPad(GPIOA, GPIOA_RGB_BLUE);
+		chThdSleepMilliseconds(50);
+		palSetPad(GPIOA, GPIOA_RGB_BLUE);
+		chThdSleepMilliseconds(100);
   }
 }
 
