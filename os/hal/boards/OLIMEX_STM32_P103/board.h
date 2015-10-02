@@ -98,7 +98,7 @@
  * PB15 - Alternate output  (MMC SPI2 MOSI).
  */
 #define VAL_GPIOBCRL            0x88888888      /*  PB7...PB0 */
-#define VAL_GPIOBCRH            0xB4B88888      /* PB15...PB8 */
+#define VAL_GPIOBCRH            0xB4B4B888      /* PB15...PB8 */
 #define VAL_GPIOBODR            0xFFFFFFFF
 
 /*

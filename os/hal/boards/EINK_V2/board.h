@@ -27,10 +27,11 @@
 #define EINK_V2
 #define BOARD_NAME              "Eink v0.2.0 driver"
 
+#define NUCLEO_HSE_CRYSTAL
 /*
  * Board frequencies.
  */
-#define STM32_LSECLK            0
+#define STM32_LSECLK            32768
 
 #if defined(NUCLEO_EXTERNAL_OSCILLATOR)
 #define STM32_HSECLK            8000000
@@ -137,22 +138,25 @@
  * PA11 - PA15, INPUT
  */
 #define VAL_GPIOACRL            0x33333333      /*  PA7...PA0 */
-#define VAL_GPIOACRH            0x88877333      /* PA15...PA8 */
+#define VAL_GPIOACRH            0x88888333      /* PA15...PA8 */
 #define VAL_GPIOAODR            0xFFFFF800
 
 /*
  * Port B setup.
  * All set to input for now,
+ * PB05  -
+ * PB10  - Alternate output  (USART3 TX)
+ * PB11  - Normal input      (USART3 RX)
  */
-#define VAL_GPIOBCRL            0x77777777      /*  PB7...PB0 */
-#define VAL_GPIOBCRH            0x88883337      /* PB15...PB8 */
+#define VAL_GPIOBCRL            0x77377777      /*  PB7...PB0 */
+#define VAL_GPIOBCRH            0x88884B37      /* PB15...PB8 */
 #define VAL_GPIOBODR            0xFFFFF200
 
 /*
  * Port C setup.
  */
 #define VAL_GPIOCCRL            0x33333333      /*  PC7...PC0 */
-#define VAL_GPIOCCRH            0x44733733     /* PC15...PC8 */
+#define VAL_GPIOCCRH            0x00733733     /* PC15...PC8 */
 #define VAL_GPIOCODR            0xFFFFFF00
 
 /*
@@ -161,7 +165,7 @@
  * PD0  - Normal input              (GPIOD_OSC_IN).
  * PD1  - Normal input              (GPIOD_OSC_OUT).
  */
-#define VAL_GPIODCRL            0x88888844      /*  PD7...PD0 */
+#define VAL_GPIODCRL            0x88888800      /*  PD7...PD0 */
 #define VAL_GPIODCRH            0x88888888      /* PD15...PD8 */
 #define VAL_GPIODODR            0xFFFFE400
 
@@ -176,12 +180,12 @@
 /*
  * USB bus activation macro, required by the USB driver.
  */
-#define usb_lld_connect_bus(usbp)
+#define usb_lld_connect_bus(usbp) palClearPad(GPIOB, GPIOB_USB_DISC)
 
 /*
  * USB bus de-activation macro, required by the USB driver.
  */
-#define usb_lld_disconnect_bus(usbp)
+#define usb_lld_disconnect_bus(usbp) palSetPad(GPIOB, GPIOB_USB_DISC)
 
 #if !defined(_FROM_ASM_)
 #ifdef __cplusplus

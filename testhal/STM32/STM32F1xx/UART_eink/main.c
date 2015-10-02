@@ -32,7 +32,7 @@ static void ledoff(void *p) {
 
   (void)p;
 
-  palSetPad(IOPORT3, GPIOC_LED);
+  palSetPad(GPIOA, GPIOA_RGB_GREEN);
 }
 
 /*
@@ -56,7 +56,7 @@ static void txend2(UARTDriver *uartp) {
   palSetPad(GPIOA, GPIOA_RGB_GREEN);
   chSysLockFromISR();
   chVTResetI(&vt1);
-  chVTDoSetI(&vt1, MS2ST(5000), restart, NULL);
+  chVTDoSetI(&vt1, MS2ST(2000), restart, NULL);
   chSysUnlockFromISR();
 }
 
@@ -104,10 +104,10 @@ static UARTConfig uart_cfg_1 = {
   rxend,
   rxchar,
   rxerr,
-  9600,
-  0,
-  USART_CR2_LINEN,
-  0
+	38400,
+	0,
+	0,
+	0
 };
 
 /*
@@ -139,7 +139,7 @@ int main(void) {
    * Normal main() thread activity, in this demo it does nothing.
    */
   while (true) {
-    chThdSleepMilliseconds(500);
+    chThdSleepMilliseconds(200);
   }
   return 0;
 }
