@@ -27,22 +27,22 @@
 #define EINK_V2
 #define BOARD_NAME              "Eink v0.2.0 driver"
 
-#define NUCLEO_HSE_CRYSTAL
+//#define NUCLEO_HSE_CRYSTAL
 /*
  * Board frequencies.
  */
 #define STM32_LSECLK            32768
 
-#if defined(NUCLEO_EXTERNAL_OSCILLATOR)
-#define STM32_HSECLK            8000000
-#define STM32_HSE_BYPASS
+//#if defined(NUCLEO_EXTERNAL_OSCILLATOR)
+//#define STM32_HSECLK            8000000
+//#define STM32_HSE_BYPASS
 
-#elif defined(NUCLEO_HSE_CRYSTAL)
+//#elif defined(NUCLEO_HSE_CRYSTAL)
 #define STM32_HSECLK            8000000
 
-#else
-#define STM32_HSECLK            0
-#endif
+//#else
+//#define STM32_HSECLK            0
+//#endif
 
 /*
  * MCU type, supported types are defined in ./os/hal/platforms/hal_lld.h.
@@ -52,22 +52,22 @@
 /*
  * IO pins assignments.
  */
-#define GPIO_EINK_D0            0
-#define GPIO_EINK_D1            1
-#define GPIO_EINK_D2		        2
-#define GPIO_EINK_D3      		  3
-#define GPIO_EINK_D4            4
-#define GPIO_EINK_D5         		5
-#define GPIO_EINK_D6            6
-#define GPIO_EINK_D7            7
-#define GPIOA_RGB_GREEN         8
-#define GPIOA_RGB_BLUE          9
-#define GPIOA_RGB_RED           10
-#define GPIOA_PA11              11	//USBM
-#define GPIOA_PA12              12	//USBP
-#define GPIOA_SWDIO             13	//JTMS
-#define GPIOA_SWCLK             14	//JTCK
-#define GPIOA_PA15              15	//JTDI
+#define GPIO_EINK_D0												0
+#define GPIO_EINK_D1												1
+#define GPIO_EINK_D2												2
+#define GPIO_EINK_D3												3
+#define GPIO_EINK_D4												4
+#define GPIO_EINK_D5												5
+#define GPIO_EINK_D6												6
+#define GPIO_EINK_D7												7
+#define GPIOA_RGB_GREEN									8
+#define GPIOA_RGB_BLUE										9
+#define GPIOA_RGB_RED											10
+#define GPIOA_PA11														11	//USBM
+#define GPIOA_PA12														12	//USBP
+#define GPIOA_SWDIO													13	//JTMS
+#define GPIOA_SWCLK													14	//JTCK
+#define GPIOA_PA15														15	//JTDI
 
 #define GPIOB_BM_PGOO           0
 #define GPIOB_BM_CHG            1
@@ -93,7 +93,7 @@
 #define GPIOC_EINK_SPH          4
 #define GPIOC_EINK_GMODE        5
 #define GPIOC_EINK_RL           6
-#define GPIOC_EINK_SPV		      7
+#define GPIOC_EINK_SPV										7
 #define GPIOC_EINK_VBORDER      8
 #define GPIOC_EINK_CKV          9
 #define GPIOC_SMPS_ON           10

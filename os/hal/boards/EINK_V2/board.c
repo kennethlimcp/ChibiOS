@@ -38,15 +38,15 @@ const PALConfig pal_default_config =
  * any other initialization.
  */
 void __early_init(void) {
-	AFIO->MAPR |= AFIO_MAPR_PD01_REMAP;
-  stm32_clock_init();
+//AFIO->MAPR |= AFIO_MAPR_PD01_REMAP;
+//stm32_clock_init();
 }
 
 /*
  * Board-specific initialization code.
  */
 void boardInit(void) {
-	//turn of all ledoff
+	//turn all led off
 	palSetPad(GPIOA, GPIOA_RGB_RED);
 	palSetPad(GPIOA, GPIOA_RGB_BLUE);
 	palSetPad(GPIOA, GPIOA_RGB_GREEN);
