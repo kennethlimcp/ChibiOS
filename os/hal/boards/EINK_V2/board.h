@@ -52,14 +52,14 @@
 /*
  * IO pins assignments.
  */
-#define GPIO_EINK_D0												0
-#define GPIO_EINK_D1												1
-#define GPIO_EINK_D2												2
-#define GPIO_EINK_D3												3
-#define GPIO_EINK_D4												4
-#define GPIO_EINK_D5												5
-#define GPIO_EINK_D6												6
-#define GPIO_EINK_D7												7
+#define GPIOA_EINK_D0											0
+#define GPIOA_EINK_D1											1
+#define GPIOA_EINK_D2											2
+#define GPIOA_EINK_D3											3
+#define GPIOA_EINK_D4											4
+#define GPIOA_EINK_D5											5
+#define GPIOA_EINK_D6											6
+#define GPIOA_EINK_D7											7
 #define GPIOA_RGB_GREEN									8
 #define GPIOA_RGB_BLUE										9
 #define GPIOA_RGB_RED											10
