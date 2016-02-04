@@ -98,13 +98,13 @@ int main(void) {
 	palClearPad(GPIOA,GPIOA_RGB_RED);
 
 	while (true) {
-		palWritePad(GPIOC, GPIOC_EINK_CKV, TRUE);
-		chSysPolledDelayX(US2ST(10));
-		palWritePad(GPIOC, GPIOC_EINK_CKV, FALSE);
-		chSysPolledDelayX(US2ST(1));
-		// palSetPad(GPIOA,GPIOA_RGB_RED);
-		// chThdSleepMilliseconds(50);
-		// palClearPad(GPIOA,GPIOA_RGB_RED);
-		// chThdSleepMilliseconds(50);
+	palWritePad(GPIOC, GPIOC_EINK_CKV, TRUE);
+	chSysPolledDelayX(US2ST(10));
+	palWritePad(GPIOC, GPIOC_EINK_CKV, FALSE);
+	chSysPolledDelayX(US2ST(1));
+	// palSetPad(GPIOA,GPIOA_RGB_RED);
+	// chThdSleepMilliseconds(50);
+	// palClearPad(GPIOA,GPIOA_RGB_RED);
+	// chThdSleepMilliseconds(50);
 	}
 }
