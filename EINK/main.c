@@ -59,7 +59,6 @@
  * Application entry point.
  */
 
-	#include "board_ED060SC4.h"
 int main(void) {
   /*
    * System initializations.
@@ -83,7 +82,7 @@ int main(void) {
   /*
    * Activates the serial driver 3 using the driver default configuration.
    */
-  sdStart(&SD3, NULL);
+			sdStart(&SD3, NULL);
 
   /*
    * Creates the blinker thread.
@@ -99,10 +98,10 @@ int main(void) {
 			palClearPad(GPIOA,GPIOA_RGB_RED);
 
 			while (true) {
-			palWritePad(GPIOC, GPIOC_EINK_CKV, TRUE);
-			chSysPolledDelayX(US2ST(10));
-			palWritePad(GPIOC, GPIOC_EINK_CKV, FALSE);
-			chSysPolledDelayX(US2ST(1));
+				palWritePad(GPIOC, GPIOC_EINK_CKV, TRUE);
+				chSysPolledDelayX(US2ST(10));
+				palWritePad(GPIOC, GPIOC_EINK_CKV, FALSE);
+				chSysPolledDelayX(US2ST(1));
 				// palSetPad(GPIOA,GPIOA_RGB_RED);
 				// chThdSleepMilliseconds(50);
 				// palClearPad(GPIOA,GPIOA_RGB_RED);
