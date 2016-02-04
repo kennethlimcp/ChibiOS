@@ -27,8 +27,6 @@
 #endif
 
 
-
-
 /** Fast vertical clock pulse for gate driver, used during initializations */
 static void vclock_quick(void)
 {
@@ -182,55 +180,28 @@ static void power_on(void)
     vscan_stop();
 }
 
-// /** Turn off the power, observing proper power sequencing. */
-// static void power_off()
-// {
-//     /* First the high voltages */
-//     setpower_vpos(FALSE);
-//     setpower_vneg(FALSE);
-//
-//     /* Wait for any capacitors to drain */
-//     chThdSleepMilliseconds(100);
-//
-//     /* Then put all signals and digital supply to ground. */
-//     setpin_le(FALSE);
-//     setpin_oe(FALSE);
-//     setpin_cl(FALSE);
-//     setpin_sph(FALSE);
-//     setpins_data(0);
-//     setpin_ckv(FALSE);
-//     setpin_gmode(FALSE);
-//     setpin_spv(FALSE);
-//     setpower_vdd(FALSE);
-// }
+/** Turn off the power, observing proper power sequencing. */
+static void power_off()
+{
+    /* First the high voltages */
+    setpower_vpos(FALSE);
+    setpower_vneg(FALSE);
 
+    /* Wait for any capacitors to drain */
+    chThdSleepMilliseconds(100);
 
-void gate_waveform(void){
-		unsigned a = 0;
-
-		chSysLockFromISR();
-		setpin_gmode(true);
-		eink_delay(3);
-
-		setpin_spv(false);
-		eink_delay(3);
-
-		vclock_quick();
-		eink_delay(3);
-
-		setpin_spv(true);
-		eink_delay(3);
-
-		for (a = 0; a < GDISP_SCREEN_HEIGHT; a++)
-							vscan_bulkwrite();
-
-		setpin_gmode(false);
-		eink_delay(3);
-
-		vclock_quick();
-		chSysUnlockFromISR();
-		chThdSleepMilliseconds(5);
+    /* Then put all signals and digital supply to ground. */
+    setpin_le(FALSE);
+    setpin_oe(FALSE);
+    setpin_cl(FALSE);
+    setpin_sph(FALSE);
+    setpins_data(0);
+    setpin_ckv(FALSE);
+    setpin_gmode(FALSE);
+    setpin_spv(FALSE);
+    setpower_vdd(FALSE);
 }
+
 
 #define BYTE_WHITE 0xAA
 #define BYTE_BLACK 0x55
@@ -259,6 +230,34 @@ static void subclear(void)
     setpin_oe(FALSE);
 }
 
+
+void gate_waveform(void){
+		unsigned a = 0;
+
+		chSysLockFromISR();
+		setpin_gmode(true);
+		eink_delay(3);
+
+		setpin_spv(false);
+		eink_delay(3);
+
+		vclock_quick();
+		eink_delay(3);
+
+		setpin_spv(true);
+		eink_delay(3);
+
+		for (a = 0; a < GDISP_SCREEN_HEIGHT; a++)
+							vscan_bulkwrite();
+
+		setpin_gmode(false);
+		eink_delay(3);
+
+		vclock_quick();
+		chSysUnlockFromISR();
+		chThdSleepMilliseconds(1);
+}
+
 /*
  * Red LED blinker thread, times are in milliseconds.
  */
@@ -266,11 +265,11 @@ static THD_WORKING_AREA(waThread1, 128);
 static THD_FUNCTION(Thread1, arg) {
   (void)arg;
 
-		chRegSetThreadName("waveform");
+		chRegSetThreadName("data");
   while (true) {
-		//	gate_waveform();
+			//chThdSleepMilliseconds(1);
+			gate_waveform();
 			subclear();
-			halWrite
   }
 }
 
@@ -280,9 +279,18 @@ static THD_FUNCTION(Thread2, arg) {
 
 		chRegSetThreadName("blinker");
   while (true) {
-			palSetPad(GPIOA,GPIOA_RGB_RED);
+			if(palReadPad(GPIOB,GPIOB_BUTTON))
+				palSetPad(GPIOA,GPIOA_RGB_RED);
+			else
+				palSetPad(GPIOA,GPIOA_RGB_GREEN);
+
 			chThdSleepMilliseconds(50);
-			palClearPad(GPIOA,GPIOA_RGB_RED);
+
+			if(palReadPad(GPIOB,GPIOB_BUTTON))
+				palClearPad(GPIOA,GPIOA_RGB_RED);
+			else
+				palClearPad(GPIOA,GPIOA_RGB_GREEN);
+
 			chThdSleepMilliseconds(50);
   }
 }
@@ -303,9 +311,12 @@ int main(void) {
   halInit();
   chSysInit();
 
+		// e-ink related
 		power_on();
+		setpins_data(0xFF);
+
   /*
-   * Activates the serial driver 2 using the driver default configuration.
+   * Activates the serial driver 3 using the driver default configuration.
    */
   sdStart(&SD3, NULL);
 

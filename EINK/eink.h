@@ -85,7 +85,7 @@ static inline void setpin_sph(bool on) {
 
 /* Set the state of the D0-D7 (source driver Data) pins. */
 static inline void setpins_data(uint8_t value) {
-    palWriteGroup(GPIOA, 0x00FF, GPIOA_EINK_D0, value);
+    palWriteGroup(GPIOA, 0xFF, GPIOA_EINK_D0, value);
 }
 
 /* Set the state of the CKV (gate driver Clock Vertical) pin. */

@@ -26,23 +26,11 @@
  */
 #define EINK_V2
 #define BOARD_NAME              "Eink v0.2.0 driver"
-
-//#define NUCLEO_HSE_CRYSTAL
 /*
  * Board frequencies.
  */
 #define STM32_LSECLK            32768
-
-//#if defined(NUCLEO_EXTERNAL_OSCILLATOR)
-//#define STM32_HSECLK            8000000
-//#define STM32_HSE_BYPASS
-
-//#elif defined(NUCLEO_HSE_CRYSTAL)
 #define STM32_HSECLK            8000000
-
-//#else
-//#define STM32_HSECLK            0
-//#endif
 
 /*
  * MCU type, supported types are defined in ./os/hal/platforms/hal_lld.h.
@@ -69,9 +57,9 @@
 #define GPIOA_SWCLK													14	//JTCK
 #define GPIOA_PA15														15	//JTDI
 
-#define GPIOB_BM_PGOO           0
+#define GPIOB_BM_PGOOD          0
 #define GPIOB_BM_CHG            1
-#define GPIOB_PB2               2
+#define GPIOB_PB2               2	//unused
 #define GPIOB_SWO               3	//JTDO
 #define GPIOB_PB4               4	//JNTRST
 #define GPIOB_USB_DISC          5	//USB_DISC
@@ -145,12 +133,13 @@
  * Port B setup.
  * All set to input for now,
  * PB05  -
+	* PB08  - Input Pullup
  * PB10  - Alternate output  (USART3 TX)
  * PB11  - Normal input      (USART3 RX)
  */
 #define VAL_GPIOBCRL            0x77377777      /*  PB7...PB0 */
-#define VAL_GPIOBCRH            0x88884B37      /* PB15...PB8 */
-#define VAL_GPIOBODR            0xFFFFF200
+#define VAL_GPIOBCRH            0x88884B38      /* PB15...PB8 */
+#define VAL_GPIOBODR            0xFFFFFF00
 
 /*
  * Port C setup.
