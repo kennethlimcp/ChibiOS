@@ -21,7 +21,6 @@ static inline void init_board(GDisplay *g) {
 /* Delay for display waveforms. Should be an accurate microsecond delay. */
 static void eink_delay(int us)
 {
-	//halPolledDelay(US2RTT(us));
 	chSysPolledDelayX(US2ST(us));
 }
 
