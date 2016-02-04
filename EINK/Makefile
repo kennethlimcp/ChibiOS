@@ -99,6 +99,10 @@ include $(CHIBIOS)/os/rt/ports/ARMCMx/compilers/GCC/mk/port_v7m.mk
 # Other files (optional).
 #include $(CHIBIOS)/test/rt/test.mk
 
+GFXLIB = ../ext/ugfx
+include $(GFXLIB)/gfx.mk
+include $(GFXLIB)/drivers/gdisp/ED060SC4/driver.mk
+
 # Define linker script file here
 LDSCRIPT= $(STARTUPLD)/STM32F103xB.ld
 
@@ -112,6 +116,7 @@ CSRC = $(STARTUPSRC) \
        $(PLATFORMSRC) \
        $(BOARDSRC) \
        $(TESTSRC) \
+							$(GFXSRC) \
 							main.c \
 
 # C++ sources that can be compiled in ARM or THUMB mode depending on the global
@@ -143,6 +148,7 @@ ASMSRC = $(STARTUPASM) $(PORTASM) $(OSALASM)
 
 INCDIR = $(STARTUPINC) $(KERNINC) $(PORTINC) $(OSALINC) \
          $(HALINC) $(PLATFORMINC) $(BOARDINC) $(TESTINC) \
+									$(GFXINC) \
          $(CHIBIOS)/os/various
 
 #
