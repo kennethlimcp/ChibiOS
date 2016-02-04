@@ -67,44 +67,44 @@ int main(void) {
    * - Kernel initialization, the main() function becomes a thread and the
    *   RTOS is active.
    */
-  halInit();
-  chSysInit();
+
+ halInit();
+ chSysInit();
 
 		// e-ink related
-		gfxInit();
-		gdispSetPowerMode(powerOn);
+	gfxInit();
+	gdispSetPowerMode(powerOn);
 		// palSetPad(GPIOC,GPIOC_EINK_RL);
 		// palSetPad(GPIOC,GPIOC_EINK_SHR);
 		// palSetPad(GPIOC,GPIOC_EINK_SPH);
+	display_init();
 
-		display_init();
+	/*
+		* Activates the serial driver 3 using the driver default configuration.
+		*/
+	sdStart(&SD3, NULL);
 
-  /*
-   * Activates the serial driver 3 using the driver default configuration.
-   */
-			sdStart(&SD3, NULL);
+	/*
+	 * Creates the blinker thread.
+	 */
+	// chThdCreateStatic(waThread1, sizeof(waThread1), HIGHPRIO, Thread1, NULL);
+	// chThdCreateStatic(waThread2, sizeof(waThread2), NORMALPRIO, Thread2, NULL);
 
-  /*
-   * Creates the blinker thread.
-   */
-  // chThdCreateStatic(waThread1, sizeof(waThread1), HIGHPRIO, Thread1, NULL);
-		// chThdCreateStatic(waThread2, sizeof(waThread2), NORMALPRIO, Thread2, NULL);
+	/*
+	 * Normal main() thread activity, in this demo it does nothing except
+	 * sleeping in a loop and check the button state.
+	 */
 
-  /*
-   * Normal main() thread activity, in this demo it does nothing except
-   * sleeping in a loop and check the button state.
-   */
+	palClearPad(GPIOA,GPIOA_RGB_RED);
 
-			palClearPad(GPIOA,GPIOA_RGB_RED);
-
-			while (true) {
-				palWritePad(GPIOC, GPIOC_EINK_CKV, TRUE);
-				chSysPolledDelayX(US2ST(10));
-				palWritePad(GPIOC, GPIOC_EINK_CKV, FALSE);
-				chSysPolledDelayX(US2ST(1));
-				// palSetPad(GPIOA,GPIOA_RGB_RED);
-				// chThdSleepMilliseconds(50);
-				// palClearPad(GPIOA,GPIOA_RGB_RED);
-				// chThdSleepMilliseconds(50);
-  }
+	while (true) {
+		palWritePad(GPIOC, GPIOC_EINK_CKV, TRUE);
+		chSysPolledDelayX(US2ST(10));
+		palWritePad(GPIOC, GPIOC_EINK_CKV, FALSE);
+		chSysPolledDelayX(US2ST(1));
+		// palSetPad(GPIOA,GPIOA_RGB_RED);
+		// chThdSleepMilliseconds(50);
+		// palClearPad(GPIOA,GPIOA_RGB_RED);
+		// chThdSleepMilliseconds(50);
+	}
 }
