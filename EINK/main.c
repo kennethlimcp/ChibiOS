@@ -47,9 +47,11 @@ int main(void) {
 	palClearPad(GPIOA,GPIOA_RGB_RED);
 
 	while (true) {
+		chSysLock();
 		palWritePad(GPIOC, GPIOC_EINK_CKV, TRUE);
 		chSysPolledDelayX(US2ST(5));
 		palWritePad(GPIOC, GPIOC_EINK_CKV, FALSE);
 		chSysPolledDelayX(US2ST(5));
+		chSysUnlock();	
 	}
 }
