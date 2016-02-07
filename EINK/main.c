@@ -18,6 +18,7 @@
 #include "hal.h"
 #include "shell.h"
 #include "chprintf.h"
+#include "eink-shell.h"
 
 
 #define serialDriver                  (&SD3)
