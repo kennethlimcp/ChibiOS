@@ -116,6 +116,9 @@ CSRC = $(STARTUPSRC) \
        $(PLATFORMSRC) \
        $(BOARDSRC) \
        $(TESTSRC) \
+							$(CHIBIOS)/os/hal/lib/streams/chprintf.c \
+							$(CHIBIOS)/os/hal/lib/streams/memstreams.c \
+							$(CHIBIOS)/os/various/shell.c \
 							$(GFXSRC) \
 							main.c \
 							display.c \
@@ -150,6 +153,7 @@ ASMSRC = $(STARTUPASM) $(PORTASM) $(OSALASM)
 INCDIR = $(STARTUPINC) $(KERNINC) $(PORTINC) $(OSALINC) \
          $(HALINC) $(PLATFORMINC) $(BOARDINC) $(TESTINC) \
 									$(GFXINC) \
+									$(CHIBIOS)/os/hal/lib/streams \
          $(CHIBIOS)/os/various
 
 #
