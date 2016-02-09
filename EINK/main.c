@@ -18,12 +18,12 @@
 #include "hal.h"
 #include "shell.h"
 #include "chprintf.h"
+#include "eink.h"
 #include "eink-shell.h"
 
 /*===========================================================================*/
 /* Main and generic code.                                                    */
 /*===========================================================================*/
-
 
 /*
 * LEDs blinker thread, times are in milliseconds.
@@ -59,6 +59,7 @@ int main(void) {
    * Shell manager initialization.
    */
 		einkShellInit();
+
 		einkShellRestart();
   /*
    * Creates the blinker thread.
@@ -71,5 +72,7 @@ int main(void) {
    */
 			while(TRUE){
 				chThdSleepMilliseconds(500);
+				chprintf(stream, "Test String");
+
 }
 }
