@@ -72,7 +72,5 @@ int main(void) {
    */
 			while(TRUE){
 				chThdSleepMilliseconds(500);
-				chprintf(stream, "Test String");
-
 }
 }
