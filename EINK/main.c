@@ -21,6 +21,24 @@
 #include "eink.h"
 #include "eink-shell.h"
 
+
+static void shell_termination_handler(eventid_t id)
+{
+  static int i = 1;
+  (void)id;
+
+  chprintf(stream, "\r\nRespawning shell (shell #%d)\r\n", ++i);
+  einkShellRestart();
+}
+
+static evhandler_t event_handlers[] = {
+  shell_termination_handler,
+};
+
+static event_listener_t event_listeners[ARRAY_SIZE(event_handlers)];
+
+
+
 /*===========================================================================*/
 /* Main and generic code.                                                    */
 /*===========================================================================*/
@@ -59,7 +77,8 @@ int main(void) {
    * Shell manager initialization.
    */
 		einkShellInit();
-
+		chEvtRegister(&shell_terminated, &event_listeners[0], 0);
+		chprintf(stream, "\r\n\r\nshell app launched!");
 		einkShellRestart();
   /*
    * Creates the blinker thread.

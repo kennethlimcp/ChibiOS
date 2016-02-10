@@ -30,7 +30,7 @@ static const SerialConfig serialConfig = {
 };
 
 static thread_t *shell_tp = NULL;
-static THD_WORKING_AREA(waShellThread, 768);
+static THD_WORKING_AREA(waShellThread, 128);
 
 void einkShellInit(void)
 {
