@@ -19,7 +19,7 @@
 
 #include "eink-shell.h"
 
-static void cmd_threads(BaseSequentialStream *chp, int argc, char *argv[])
+void cmd_threads(BaseSequentialStream *chp, int argc, char *argv[])
 {
   static const char *states[] = {CH_STATE_NAMES};
   thread_t *tp;
