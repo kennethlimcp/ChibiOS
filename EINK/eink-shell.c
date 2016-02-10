@@ -25,12 +25,22 @@ void *stream;
 
 eink_command_end();
 
+static thread_t *shell_tp = NULL;
+static THD_WORKING_AREA(waShellThread, 256);
+
+void cmd_mem(BaseSequentialStream *chp, int argc, char *argv[]);
+void cmd_threads(BaseSequentialStream *chp, int argc, char *argv[]);
+
+static const ShellCommand shellCommands[] = {
+  {"mem", cmd_mem},
+  {"threads", cmd_threads},
+  {NULL, NULL}
+};
+
 static const SerialConfig serialConfig = {
   115200,
 };
 
-static thread_t *shell_tp = NULL;
-static THD_WORKING_AREA(waShellThread, 128);
 
 void einkShellInit(void)
 {
@@ -42,18 +52,17 @@ void einkShellInit(void)
 
 void einkShellRestart(void)
 {
-  static ShellConfig shellConfig;
-  static const ShellCommand *shellCommands;
+	static ShellConfig shellConfig;
+	//static const ShellCommand *shellCommands;
 
-  shellCommands = eink_command_start();
+	//shellCommands = eink_command_start();
 
-  shellConfig.sc_channel = stream_driver;
-  shellConfig.sc_commands = shellCommands;
+	shellConfig.sc_channel = stream_driver;
+	shellConfig.sc_commands = shellCommands;
 
   /* Recovers memory of the previous shell. */
   if (shell_tp && chThdTerminatedX(shell_tp))
     chThdRelease(shell_tp);
-
   shell_tp = shellCreateStatic(&shellConfig, waShellThread,
                               sizeof(waShellThread), NORMALPRIO - 5);
 }
