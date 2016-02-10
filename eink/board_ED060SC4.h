@@ -26,9 +26,9 @@ static void eink_delay(int us)
 
 /* Turn the E-ink panel Vdd supply (+3.3V) on or off. */
 static inline void setpower_vdd(GDisplay *g, bool_t on) {
-		palWritePad(GPIOB, GPIOB_EINK_VDD, on);
-		palWritePad(GPIOC, GPIOC_SMPS_ON, !on);
-		palWritePad(GPIOC, GPIOC_POS_ON, !on);
+	palWritePad(GPIOB, GPIOB_EINK_VDD, on);
+	palWritePad(GPIOC, GPIOC_SMPS_ON, !on);
+	palWritePad(GPIOC, GPIOC_POS_ON, !on);
 }
 
 /* Turn the E-ink panel negative supplies (-15V, -20V) on or off. */
