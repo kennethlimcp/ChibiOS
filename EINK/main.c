@@ -29,6 +29,7 @@ static void shell_termination_handler(eventid_t id)
 
   chprintf(stream, "\r\nRespawning shell (shell #%d)\r\n", ++i);
   einkShellRestart();
+		palClearPad(GPIOA,GPIOA_RGB_BLUE);
 }
 
 static evhandler_t event_handlers[] = {
@@ -90,6 +91,7 @@ int main(void) {
    * sleeping in a loop and listen for events.
    */
 			while(TRUE){
+				chEvtDispatch(event_handlers, chEvtWaitOne(ALL_EVENTS));
 				chThdSleepMilliseconds(500);
 }
 }
