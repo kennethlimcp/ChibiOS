@@ -83,7 +83,7 @@ endif
 #
 
 # Define project name here
-PROJECT = eink-v2-driver
+PROJECT = eink-v020
 
 # Imported source files and paths
 CHIBIOS = ..
