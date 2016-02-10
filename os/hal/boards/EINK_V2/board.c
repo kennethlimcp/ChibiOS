@@ -39,7 +39,7 @@ const PALConfig pal_default_config =
  */
 void __early_init(void) {
 //AFIO->MAPR |= AFIO_MAPR_PD01_REMAP;
-//stm32_clock_init();
+	stm32_clock_init();
 }
 
 /*
