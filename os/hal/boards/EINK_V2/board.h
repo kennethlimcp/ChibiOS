@@ -137,9 +137,9 @@
  * PB10  - Alternate output  (USART3 TX)
  * PB11  - Normal input      (USART3 RX)
  */
-#define VAL_GPIOBCRL            0x77377777      /*  PB7...PB0 */
+#define VAL_GPIOBCRL            0x77377788      /*  PB7...PB0 */
 #define VAL_GPIOBCRH            0x88884B38      /* PB15...PB8 */
-#define VAL_GPIOBODR            0xFFFFFF00
+#define VAL_GPIOBODR            0xFFFFFF03
 
 /*
  * Port C setup.
