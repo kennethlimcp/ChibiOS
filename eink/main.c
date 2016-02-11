@@ -91,7 +91,12 @@ int main(void) {
    * sleeping in a loop and listen for events.
    */
 			while(TRUE){
-				chEvtDispatch(event_handlers, chEvtWaitOne(ALL_EVENTS));
-				chThdSleepMilliseconds(500);
+				//chEvtDispatch(event_handlers, chEvtWaitOne(ALL_EVENTS));
+				chThdSleepMilliseconds(10);
+				if(palReadPad(GPIOB,GPIOB_BM_CHG))
+					palSetPad(GPIOA,GPIOA_RGB_BLUE);
+				else
+					palClearPad(GPIOA,GPIOA_RGB_BLUE);
+
 }
 }
