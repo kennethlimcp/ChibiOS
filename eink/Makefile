@@ -104,7 +104,7 @@ include $(GFXLIB)/gfx.mk
 include $(GFXLIB)/drivers/gdisp/ED060SC4/driver.mk
 
 # Define linker script file here
-LDSCRIPT= $(STARTUPLD)/STM32F103xB_eink.ld
+LDSCRIPT= STM32F103xB_eink.ld
 
 # C sources that can be compiled in ARM or THUMB mode depending on the global
 # setting.
