@@ -1,1 +1,1 @@
-arm-none-eabi-gdb -x gdbcommands.txt build/eink-v2-driver.elf
+arm-none-eabi-gdb -x gdbcommands.txt build/eink-v020.elf
