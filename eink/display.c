@@ -36,6 +36,7 @@ static void draw_temp_digit(int i, char c)
 
 void display_digit(void){
 	gdispDrawString(400, 140, "Akku vähissä!", mediumfont, 0);
+	gdispFlush();
 }
 
 // static void draw_samples(int start)
