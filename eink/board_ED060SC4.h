@@ -21,7 +21,7 @@ static inline void init_board(GDisplay *g) {
 /* Delay for display waveforms. Should be an accurate microsecond delay. */
 static void eink_delay(int us)
 {
-	chSysPolledDelayX(US2ST(us));
+	chSysPolledDelayX(US2RTC(36000000,us));
 }
 
 /* Turn the E-ink panel Vdd supply (+3.3V) on or off. */

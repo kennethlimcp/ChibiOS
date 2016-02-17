@@ -74,6 +74,8 @@ int main(void) {
   halInit();
   chSysInit();
 
+		//palSetPadMode(GPIOA,GPIOA_RGB_GREEN,PAL_MODE_STM32_ALTERNATE_PUSHPULL); //configure MCO pin
+
   /*
    * Shell manager initialization.
    */
